@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0E7E615D23185E62007286AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E615C23185E62007286AA /* AppDelegate.swift */; };
-		0E7E615F23185E62007286AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E615E23185E62007286AA /* ViewController.swift */; };
+		0E7E615F23185E62007286AA /* DotsMatrixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E615E23185E62007286AA /* DotsMatrixViewController.swift */; };
 		0E7E616223185E62007286AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E616023185E62007286AA /* Main.storyboard */; };
 		0E7E616423185E65007286AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E616323185E65007286AA /* Assets.xcassets */; };
 		0E7E616723185E65007286AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E616523185E65007286AA /* LaunchScreen.storyboard */; };
 		0E7E617223185E65007286AA /* DotsMatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E617123185E65007286AA /* DotsMatrixTests.swift */; };
 		0E7E617D23185E65007286AA /* DotsMatrixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E617C23185E65007286AA /* DotsMatrixUITests.swift */; };
+		7DA84284231BCD3B00745EF4 /* MatrixItemViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA84283231BCD3B00745EF4 /* MatrixItemViewData.swift */; };
+		7DA84286231BCE4600745EF4 /* DotsMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA84285231BCE4600745EF4 /* DotsMatrix.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,7 @@
 /* Begin PBXFileReference section */
 		0E7E615923185E62007286AA /* DotsMatrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotsMatrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7E615C23185E62007286AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E7E615E23185E62007286AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0E7E615E23185E62007286AA /* DotsMatrixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsMatrixViewController.swift; sourceTree = "<group>"; };
 		0E7E616123185E62007286AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E7E616323185E65007286AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E7E616623185E65007286AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		0E7E617823185E65007286AA /* DotsMatrixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DotsMatrixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7E617C23185E65007286AA /* DotsMatrixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsMatrixUITests.swift; sourceTree = "<group>"; };
 		0E7E617E23185E65007286AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7DA84283231BCD3B00745EF4 /* MatrixItemViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixItemViewData.swift; sourceTree = "<group>"; };
+		7DA84285231BCE4600745EF4 /* DotsMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsMatrix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +101,9 @@
 		0E7E615B23185E62007286AA /* DotsMatrix */ = {
 			isa = PBXGroup;
 			children = (
+				7DA84282231BCC1C00745EF4 /* ViewControllers */,
+				7DA84281231BCBA300745EF4 /* Models */,
 				0E7E615C23185E62007286AA /* AppDelegate.swift */,
-				0E7E615E23185E62007286AA /* ViewController.swift */,
 				0E7E616023185E62007286AA /* Main.storyboard */,
 				0E7E616323185E65007286AA /* Assets.xcassets */,
 				0E7E616523185E65007286AA /* LaunchScreen.storyboard */,
@@ -123,6 +128,23 @@
 				0E7E617E23185E65007286AA /* Info.plist */,
 			);
 			path = DotsMatrixUITests;
+			sourceTree = "<group>";
+		};
+		7DA84281231BCBA300745EF4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7DA84283231BCD3B00745EF4 /* MatrixItemViewData.swift */,
+				7DA84285231BCE4600745EF4 /* DotsMatrix.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7DA84282231BCC1C00745EF4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0E7E615E23185E62007286AA /* DotsMatrixViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,8 +299,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7E615F23185E62007286AA /* ViewController.swift in Sources */,
+				0E7E615F23185E62007286AA /* DotsMatrixViewController.swift in Sources */,
 				0E7E615D23185E62007286AA /* AppDelegate.swift in Sources */,
+				7DA84286231BCE4600745EF4 /* DotsMatrix.swift in Sources */,
+				7DA84284231BCD3B00745EF4 /* MatrixItemViewData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

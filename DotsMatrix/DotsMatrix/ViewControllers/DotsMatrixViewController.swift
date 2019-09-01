@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController
+class DotsMatrixViewController: UIViewController
 {
-  override func viewDidLoad()
+    @IBOutlet weak var collectionView: UICollectionView!
+    override func viewDidLoad()
   {
     super.viewDidLoad()
   }

@@ -19,16 +19,35 @@ class DotsMatrixTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testMatrixInit() {
+        let dotsMatrix = DotsMatrix(rows: 20, columns: 15)
+        
+        for row in 0..<dotsMatrix.matrix.count
+        {
+            for column in 0..<dotsMatrix.matrix[row].count
+            {
+                switch dotsMatrix.matrix[row][column]
+                {
+                case .dot:
+                    XCTAssert(true)
+                case .rectangle:
+                    XCTAssert(false)
+                }
+            }
         }
     }
-
+    
+    func testMatrixChange() {
+        var dotsMatrix = DotsMatrix(rows: 20, columns: 15)
+        dotsMatrix.indexTapped(row: 5, column: 9)
+        
+        let item = dotsMatrix.matrix[5][9]
+        switch item
+        {
+        case .rectangle(let belong):
+            XCTAssert(belong == false)
+        case .dot:
+            XCTAssert(false)
+        }
+    }
 }
