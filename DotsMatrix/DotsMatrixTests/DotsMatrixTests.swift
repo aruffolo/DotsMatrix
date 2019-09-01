@@ -37,7 +37,7 @@ class DotsMatrixTests: XCTestCase {
         }
     }
     
-    func testMatrixChange() {
+    func testMatrixChangeToRectangle() {
         var dotsMatrix = DotsMatrix(rows: 20, columns: 15)
         dotsMatrix.indexTapped(row: 5, column: 9)
         
@@ -48,6 +48,21 @@ class DotsMatrixTests: XCTestCase {
             XCTAssert(belong == false)
         case .dot:
             XCTAssert(false)
+        }
+    }
+    
+    func testMatrixChangeToDot() {
+        var dotsMatrix = DotsMatrix(rows: 20, columns: 15)
+        dotsMatrix.indexTapped(row: 5, column: 9)
+        dotsMatrix.indexTapped(row: 5, column: 9)
+
+        let item = dotsMatrix.matrix[5][9]
+        switch item
+        {
+        case .rectangle:
+            XCTAssert(false)
+        case .dot:
+            XCTAssert(true)
         }
     }
 }
