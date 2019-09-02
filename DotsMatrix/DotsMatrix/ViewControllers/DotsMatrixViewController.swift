@@ -143,7 +143,7 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
     private func setDotCell(cell: DotsCollectionViewCell, collectionViewWidth: CGFloat) {
         let width = calculateItemWidth(collectionViewWidth: collectionViewWidth)
         cell.shapeView.layer.cornerRadius = width / 2
-        cell.shapeView.backgroundColor = UIColor.blue
+        cell.shapeView.backgroundColor = UIColor.cyan
     }
 
     private func setRectangleCell(cell: DotsCollectionViewCell, belongsToLargest: Bool) {
@@ -152,7 +152,7 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
             cell.shapeView.backgroundColor = UIColor.red
         }
         else {
-            cell.shapeView.backgroundColor = UIColor.yellow
+            cell.shapeView.backgroundColor = UIColor.blue
         }
     }
 }

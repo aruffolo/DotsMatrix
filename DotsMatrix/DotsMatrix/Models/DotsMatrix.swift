@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct Rectangle {
+    let row: Int
+    let column: Int
+    let rowSize: Int
+    let columnSize: Int
+}
+
 struct DotsMatrix
 {
     private(set) var matrix: [[MatrixItemViewData]]
@@ -27,6 +34,204 @@ struct DotsMatrix
             matrix[row][column] = .dot
         }
         
-        // TODO: check fi the rectangle belong to the largest rectangle
+        if let maxRectangle = maxRectangle()
+        {
+            for row in maxRectangle.row..<maxRectangle.rowSize
+            {
+                for column in maxRectangle.column..<maxRectangle.columnSize
+                {
+                    matrix[row][column] = .rectangle(belongsToLargestRectangle: true)
+                }
+            }
+        }
+    }
+    
+    func maxRectangle() -> Rectangle?
+    {
+        var sizeTuple: (rowSize: Int, columnSize: Int)?
+        var maxRowPosition: Int?
+        var maxColumnPosition: Int?
+        
+        for row in 0..<matrix.count
+        {
+            for column in 0..<matrix[row].count
+            {
+                if let newTuple = maxSizeFromPosition(startRow: row, startColumn: column)
+                {
+                    if let rect = updateRectangle(row: row, column: column, sizeTuple: sizeTuple, newTuple: newTuple)
+                    {
+                        maxRowPosition = rect.row
+                        maxColumnPosition = rect.column
+                        sizeTuple = (rowSize: rect.rowSize, columnSize: rect.columnSize)
+                    }
+                }
+            }
+        }
+        
+        if let maxRowPosition = maxRowPosition, let maxColumnPosition = maxColumnPosition, let sizeTuple = sizeTuple
+        {
+            return Rectangle(row: maxRowPosition, column: maxColumnPosition, rowSize: sizeTuple.rowSize,
+                             columnSize: sizeTuple.columnSize)
+        }
+        return nil
+    }
+    
+    func updateRectangle(row: Int, column: Int,
+                         sizeTuple: (rowSize: Int, columnSize: Int)?,
+                         newTuple: (rowSize: Int, columnSize: Int)) -> Rectangle?
+    {
+        if let currentTuple = sizeTuple,
+            currentTuple.columnSize * currentTuple.rowSize < newTuple.columnSize * newTuple.rowSize
+        {
+            return Rectangle.init(row: row, column: column, rowSize: newTuple.rowSize, columnSize: newTuple.columnSize)
+            
+        }
+        else if sizeTuple == nil
+        {
+            return Rectangle.init(row: row, column: column, rowSize: newTuple.rowSize, columnSize: newTuple.columnSize)
+        }
+        
+        return nil
+    }
+
+    func maxSizeFromPosition(startRow: Int, startColumn: Int) -> (rowSize: Int, columnSize: Int)?
+    {
+        var sizeTuple: (rowSize: Int, columnSize: Int)?
+
+        if let newTuple = sizeFromTallerRectangle(startRow: startRow,
+                                                  startColumn: startColumn,
+                                                  sizeTuple: sizeTuple)
+        {
+            sizeTuple = newTuple
+        }
+        
+        print("********** row size and column size inverted **********")
+        
+        if let newTuple = sizeFromWiderRectangle(startRow: startRow,
+                                                 startColumn: startColumn,
+                                                 sizeTuple: sizeTuple)
+        {
+            sizeTuple = newTuple
+        }
+
+        return sizeTuple
+    }
+    
+    private func sizeFromTallerRectangle(
+        startRow: Int,
+        startColumn: Int,
+        sizeTuple: (rowSize: Int, columnSize: Int)?
+        ) -> (rowSize: Int, columnSize: Int)?
+    {
+        var sizeTuple: (rowSize: Int, columnSize: Int)?
+        for rowSize in 1...matrix.count - startRow
+        {
+            for columnSize in 1...matrix[0].count - startColumn
+            {
+                //print("rowSize: \(rowSize) columnSize: \(columnSize)")
+                if let newTuple = createNewMaxSizeRange(startRow: startRow,
+                                                        startColumn: startColumn,
+                                                        rowSize: rowSize,
+                                                        columnSize: columnSize,
+                                                        currentTuple: sizeTuple)
+                {
+                    sizeTuple = newTuple
+                }
+            }
+        }
+
+        return sizeTuple
+    }
+    
+    private func sizeFromWiderRectangle(
+        startRow: Int,
+        startColumn: Int,
+        sizeTuple: (rowSize: Int, columnSize: Int)?
+    ) -> (rowSize: Int, columnSize: Int)?
+    {
+        var sizeTuple: (rowSize: Int, columnSize: Int)?
+        for columnSize in 1...matrix[0].count - startColumn
+        {
+            for rowSize in 1...matrix.count - startRow
+            {
+                //print("rowSize: \(rowSize) columnSize: \(columnSize)")
+                if let newTuple = createNewMaxSizeRange(startRow: startRow,
+                                                        startColumn: startColumn,
+                                                        rowSize: rowSize,
+                                                        columnSize: columnSize,
+                                                        currentTuple: sizeTuple)
+                {
+                    sizeTuple = newTuple
+                }
+            }
+        }
+        
+        return sizeTuple
+    }
+    
+    func createNewMaxSizeRange(startRow: Int, startColumn: Int,
+                               rowSize: Int,
+                               columnSize: Int,
+                               currentTuple: (rowSize: Int, columnSize: Int)?) -> (rowSize: Int, columnSize: Int)?
+    {
+        var sizeTuple: (rowSize: Int, columnSize: Int)?
+        if isRectangleSquare(startRow: startRow, startColumn: startColumn,
+                             rowSize: rowSize, columnSize: columnSize)
+        {
+            if let currentTuple = sizeTuple, rowSize * columnSize > currentTuple.rowSize * currentTuple.columnSize
+            {
+                sizeTuple = (rowSize: rowSize, columnSize: columnSize)
+            }
+            else if sizeTuple == nil
+            {
+                sizeTuple = (rowSize: rowSize, columnSize: columnSize)
+            }
+        }
+        
+        return sizeTuple
+    }
+    
+    func isRectangleSquare(startRow: Int, startColumn: Int, rowSize: Int, columnSize: Int) -> Bool
+    {
+        for row in startRow..<(startRow + rowSize)
+        {
+            for colum in startColumn..<(startColumn + columnSize)
+            {
+                switch matrix[row][colum]
+                {
+                case .dot:
+                    return false
+                default:
+                    break
+                }
+            }
+        }
+        return true
+    }
+    
+    func printMatrix() {
+        for row in 0..<matrix.count
+        {
+            var rowString = ""
+            for column in 0..<matrix[row].count
+            {
+                switch matrix[row][column]
+                {
+                case .dot:
+                    rowString += "*"
+                case .rectangle(let belongToBiggestRectangle):
+                    if belongToBiggestRectangle
+                    {
+                        rowString += "+"
+                    }
+                    else
+                    {
+                        rowString += "-"
+                    }
+                }
+            }
+            
+            print(rowString)
+        }
     }
 }
