@@ -68,33 +68,33 @@ class DotsMatrixTests: XCTestCase {
     
     // swiftlint:disable function_body_length
     func testMatrixPrint() {
-        var dotsMatrix = DotsMatrix(rows: 4, columns: 4)
-        
-        dotsMatrix.printMatrix()
-        print("Matrix printed before tapping")
-        dotsMatrix.indexTapped(row: 0, column: 0)
-        dotsMatrix.indexTapped(row: 0, column: 1)
-        
-        dotsMatrix.indexTapped(row: 2, column: 2)
-        dotsMatrix.printMatrix()
-        print("Matrix printed after tapping")
-        
-        if let size = dotsMatrix.maxSizeFromPosition(startRow: 0, startColumn: 0)
-        {
-            print("rowSize: \(size.rowSize), columnSize: \(size.columnSize)")
-        }
-        else
-        {
-            print("no matrix found")
-        }
-        
-        if let maxSize = dotsMatrix.maxRectangle()
-        {
-            print("rowSize: \(maxSize.rowSize), columnSize: \(maxSize.columnSize)")
-        }
-        else
-        {
-            print("no matrix found")
-        }
+//        var dotsMatrix = DotsMatrix(rows: 4, columns: 4)
+//        
+//        dotsMatrix.printMatrix()
+//        print("Matrix printed before tapping")
+//        dotsMatrix.indexTapped(row: 0, column: 0)
+//        dotsMatrix.indexTapped(row: 0, column: 1)
+//        
+//        dotsMatrix.indexTapped(row: 2, column: 2)
+//        dotsMatrix.printMatrix()
+//        print("Matrix printed after tapping")
+//        
+//        if let size = dotsMatrix.maxSizeFromPosition(startRow: 0, startColumn: 0)
+//        {
+//            print("rowSize: \(size.rowSize), columnSize: \(size.columnSize)")
+//        }
+//        else
+//        {
+//            print("no matrix found")
+//        }
+//        
+//        if let maxSize = dotsMatrix.maxRectangle()
+//        {
+//            print("rowSize: \(maxSize.rowSize), columnSize: \(maxSize.columnSize)")
+//        }
+//        else
+//        {
+//            print("no matrix found")
+//        }
     }
 }

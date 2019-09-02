@@ -17,6 +17,7 @@
 		7DA84284231BCD3B00745EF4 /* MatrixItemViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA84283231BCD3B00745EF4 /* MatrixItemViewData.swift */; };
 		7DA84286231BCE4600745EF4 /* DotsMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA84285231BCE4600745EF4 /* DotsMatrix.swift */; };
 		7DA84289231BE3C300745EF4 /* DotsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA84288231BE3C300745EF4 /* DotsCollectionViewCell.swift */; };
+		7DA8428C231D4CFA00745EF4 /* DotsMatrixViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8428B231D4CFA00745EF4 /* DotsMatrixViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		7DA84283231BCD3B00745EF4 /* MatrixItemViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixItemViewData.swift; sourceTree = "<group>"; };
 		7DA84285231BCE4600745EF4 /* DotsMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsMatrix.swift; sourceTree = "<group>"; };
 		7DA84288231BE3C300745EF4 /* DotsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsCollectionViewCell.swift; sourceTree = "<group>"; };
+		7DA8428B231D4CFA00745EF4 /* DotsMatrixViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsMatrixViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		0E7E615B23185E62007286AA /* DotsMatrix */ = {
 			isa = PBXGroup;
 			children = (
+				7DA8428A231D4CD000745EF4 /* ViewModels */,
 				7DA84282231BCC1C00745EF4 /* ViewControllers */,
 				7DA84281231BCBA300745EF4 /* Models */,
 				0E7E615C23185E62007286AA /* AppDelegate.swift */,
@@ -156,6 +159,14 @@
 				7DA84288231BE3C300745EF4 /* DotsCollectionViewCell.swift */,
 			);
 			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		7DA8428A231D4CD000745EF4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7DA8428B231D4CFA00745EF4 /* DotsMatrixViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7E615F23185E62007286AA /* DotsMatrixViewController.swift in Sources */,
+				7DA8428C231D4CFA00745EF4 /* DotsMatrixViewModel.swift in Sources */,
 				0E7E615D23185E62007286AA /* AppDelegate.swift in Sources */,
 				7DA84289231BE3C300745EF4 /* DotsCollectionViewCell.swift in Sources */,
 				7DA84286231BCE4600745EF4 /* DotsMatrix.swift in Sources */,

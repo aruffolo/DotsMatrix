@@ -36,9 +36,10 @@ struct DotsMatrix
         
         if let maxRectangle = maxRectangle()
         {
-            for row in maxRectangle.row..<maxRectangle.rowSize
+            resetPreviousRedRectangle()
+            for row in maxRectangle.row..<(maxRectangle.row + maxRectangle.rowSize)
             {
-                for column in maxRectangle.column..<maxRectangle.columnSize
+                for column in maxRectangle.column..<(maxRectangle.column + maxRectangle.columnSize)
                 {
                     matrix[row][column] = .rectangle(belongsToLargestRectangle: true)
                 }
@@ -46,7 +47,24 @@ struct DotsMatrix
         }
     }
     
-    func maxRectangle() -> Rectangle?
+    private mutating func resetPreviousRedRectangle()
+    {
+        for row in 0..<matrix.count
+        {
+            for column in 0..<matrix[row].count
+            {
+                switch matrix[row][column]
+                {
+                case .rectangle:
+                    matrix[row][column] = MatrixItemViewData.rectangle(belongsToLargestRectangle: false)
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    private func maxRectangle() -> Rectangle?
     {
         var sizeTuple: (rowSize: Int, columnSize: Int)?
         var maxRowPosition: Int?
@@ -76,7 +94,7 @@ struct DotsMatrix
         return nil
     }
     
-    func updateRectangle(row: Int, column: Int,
+    private func updateRectangle(row: Int, column: Int,
                          sizeTuple: (rowSize: Int, columnSize: Int)?,
                          newTuple: (rowSize: Int, columnSize: Int)) -> Rectangle?
     {
@@ -94,7 +112,7 @@ struct DotsMatrix
         return nil
     }
 
-    func maxSizeFromPosition(startRow: Int, startColumn: Int) -> (rowSize: Int, columnSize: Int)?
+    private func maxSizeFromPosition(startRow: Int, startColumn: Int) -> (rowSize: Int, columnSize: Int)?
     {
         var sizeTuple: (rowSize: Int, columnSize: Int)?
 
@@ -104,9 +122,7 @@ struct DotsMatrix
         {
             sizeTuple = newTuple
         }
-        
-        print("********** row size and column size inverted **********")
-        
+
         if let newTuple = sizeFromWiderRectangle(startRow: startRow,
                                                  startColumn: startColumn,
                                                  sizeTuple: sizeTuple)
@@ -128,7 +144,6 @@ struct DotsMatrix
         {
             for columnSize in 1...matrix[0].count - startColumn
             {
-                //print("rowSize: \(rowSize) columnSize: \(columnSize)")
                 if let newTuple = createNewMaxSizeRange(startRow: startRow,
                                                         startColumn: startColumn,
                                                         rowSize: rowSize,
@@ -154,7 +169,6 @@ struct DotsMatrix
         {
             for rowSize in 1...matrix.count - startRow
             {
-                //print("rowSize: \(rowSize) columnSize: \(columnSize)")
                 if let newTuple = createNewMaxSizeRange(startRow: startRow,
                                                         startColumn: startColumn,
                                                         rowSize: rowSize,
@@ -169,7 +183,7 @@ struct DotsMatrix
         return sizeTuple
     }
     
-    func createNewMaxSizeRange(startRow: Int, startColumn: Int,
+    private func createNewMaxSizeRange(startRow: Int, startColumn: Int,
                                rowSize: Int,
                                columnSize: Int,
                                currentTuple: (rowSize: Int, columnSize: Int)?) -> (rowSize: Int, columnSize: Int)?
@@ -191,7 +205,7 @@ struct DotsMatrix
         return sizeTuple
     }
     
-    func isRectangleSquare(startRow: Int, startColumn: Int, rowSize: Int, columnSize: Int) -> Bool
+    private func isRectangleSquare(startRow: Int, startColumn: Int, rowSize: Int, columnSize: Int) -> Bool
     {
         for row in startRow..<(startRow + rowSize)
         {

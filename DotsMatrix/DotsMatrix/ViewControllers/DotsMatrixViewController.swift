@@ -16,16 +16,29 @@ class DotsMatrixViewController: UIViewController
     private var collectionFlowDelegate: DotsCollectionFlowDelegate!
     private var dotsMatrix: DotsMatrix!
     
+    private let viewModel = DotsMatrixViewModel()
+    
     override func loadView() {
         super.loadView()
         
-        dotsMatrix = DotsMatrix(rows: 15, columns: 20)
+        dotsMatrix = viewModel.dotsMatrix
+        
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         initDataSource()
+        
+        viewModel.updateMatrix = { [unowned self] (dotsMatrix: DotsMatrix) in
+            self.collectionDataSource.updateMatrix(matrix: dotsMatrix.matrix)
+            self.collectionFlowDelegate.updateMatrix(matrix: dotsMatrix.matrix)
+            self.collectionView.reloadData()
+        }
+        
+        collectionFlowDelegate.didSelectItem = { [unowned self] row, column in
+            self.viewModel.itemTapped(row: row, column: column)
+        }
     }
     
     private func initDataSource()
@@ -46,7 +59,8 @@ class DotsCollectionDataSource: NSObject, UICollectionViewDataSource
         self.matrix = matrix
     }
     
-    func updateMatrix(matrix: [[MatrixItemViewData]]) {
+    func updateMatrix(matrix: [[MatrixItemViewData]])
+    {
         self.matrix = matrix
     }
     
@@ -74,6 +88,8 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
 {
     private(set) var matrix: [[MatrixItemViewData]]
     
+    var didSelectItem: ((_ row: Int, _ column: Int) -> Void)?
+    
     private let horizontalMargin: CGFloat = 2
     private let minimumSpacing: CGFloat = 2
     private let rows: Int
@@ -83,6 +99,11 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
     {
         self.rows = matrix.count
         self.columns = matrix.first?.count ?? 0
+        self.matrix = matrix
+    }
+    
+    func updateMatrix(matrix: [[MatrixItemViewData]])
+    {
         self.matrix = matrix
     }
 
@@ -154,5 +175,10 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
         else {
             cell.shapeView.backgroundColor = UIColor.blue
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        didSelectItem?(indexPath.section, indexPath.item)
     }
 }
