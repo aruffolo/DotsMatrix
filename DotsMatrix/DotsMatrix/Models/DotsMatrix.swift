@@ -34,9 +34,9 @@ struct DotsMatrix
             matrix[row][column] = .dot
         }
         
+        resetPreviousRedRectangle()
         if let maxRectangle = maxRectangle()
         {
-            resetPreviousRedRectangle()
             for row in maxRectangle.row..<(maxRectangle.row + maxRectangle.rowSize)
             {
                 for column in maxRectangle.column..<(maxRectangle.column + maxRectangle.columnSize)
@@ -192,11 +192,11 @@ struct DotsMatrix
         if isRectangleSquare(startRow: startRow, startColumn: startColumn,
                              rowSize: rowSize, columnSize: columnSize)
         {
-            if let currentTuple = sizeTuple, rowSize * columnSize > currentTuple.rowSize * currentTuple.columnSize
+            if let currentTuple = currentTuple, rowSize * columnSize > currentTuple.rowSize * currentTuple.columnSize
             {
                 sizeTuple = (rowSize: rowSize, columnSize: columnSize)
             }
-            else if sizeTuple == nil
+            else if currentTuple == nil
             {
                 sizeTuple = (rowSize: rowSize, columnSize: columnSize)
             }
