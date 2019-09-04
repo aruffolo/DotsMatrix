@@ -12,6 +12,8 @@ class DotsMatrixViewController: UIViewController
 {
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var maxSizeLabel: UILabel!
+    @IBOutlet weak var selectedLabel: UILabel!
     private var collectionDataSource: DotsCollectionDataSource!
     private var collectionFlowDelegate: DotsCollectionFlowDelegate!
     private var dotsMatrix: DotsMatrix!
@@ -36,6 +38,14 @@ class DotsMatrixViewController: UIViewController
             self.collectionView.reloadData()
         }
         
+        viewModel.updateSize = { [unowned self] size in
+            self.maxSizeLabel.text = size
+        }
+        
+        viewModel.updateSelected = { [unowned self] selected in
+            self.selectedLabel.text = selected
+        }
+        
         collectionFlowDelegate.didSelectItem = { [unowned self] row, column in
             self.viewModel.itemTapped(row: row, column: column)
         }
@@ -47,6 +57,14 @@ class DotsMatrixViewController: UIViewController
         collectionView.dataSource = collectionDataSource
         collectionFlowDelegate = DotsCollectionFlowDelegate(rows: 15, columns: 20, matrix: dotsMatrix.matrix)
         collectionView.delegate = collectionFlowDelegate
+    }
+    
+    @IBAction func selectAllButtonAction(_ sender: UIButton) {
+        viewModel.selectAll()
+    }
+    
+    @IBAction func clearAllButtonAction(_ sender: UIButton) {
+        viewModel.clearAll()
     }
 }
 
