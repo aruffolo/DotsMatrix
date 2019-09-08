@@ -66,7 +66,6 @@ class DotsMatrixTests: XCTestCase {
         }
     }
     
-    // swiftlint:disable function_body_length
     func testMatrixPrint() {
 //        var dotsMatrix = DotsMatrix(rows: 4, columns: 4)
 //        
