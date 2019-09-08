@@ -21,11 +21,11 @@ class DotsMatrixViewController: UIViewController
 
   private let viewModel = DotsMatrixViewModel()
 
-  override func loadView() {
+  override func loadView()
+  {
     super.loadView()
 
     dotsMatrix = viewModel.dotsMatrix
-
   }
 
   override func viewDidLoad()
@@ -65,11 +65,13 @@ class DotsMatrixViewController: UIViewController
     collectionView.delegate = collectionFlowDelegate
   }
 
-  @IBAction func selectAllButtonAction(_ sender: UIButton) {
+  @IBAction func selectAllButtonAction(_ sender: UIButton)
+  {
     viewModel.selectAll()
   }
 
-  @IBAction func clearAllButtonAction(_ sender: UIButton) {
+  @IBAction func clearAllButtonAction(_ sender: UIButton)
+  {
     viewModel.clearAll()
   }
 }
@@ -88,16 +90,19 @@ class DotsCollectionDataSource: NSObject, UICollectionViewDataSource
     self.matrix = matrix
   }
 
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int
+  {
     return matrix.count
   }
 
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+  {
     return matrix[section].count
   }
 
   func collectionView(_ collectionView: UICollectionView,
-                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+  {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DotsCollectionViewCell.identifier,
                                                         for: indexPath) as? DotsCollectionViewCell
       else {
@@ -132,40 +137,44 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+                      sizeForItemAt indexPath: IndexPath) -> CGSize
+  {
     let width = calculateItemWidth(collectionViewWidth: collectionView.bounds.width)
 
     return CGSize(width: width, height: width)
   }
 
-  private func calculateItemWidth(collectionViewWidth: CGFloat) -> CGFloat {
+  private func calculateItemWidth(collectionViewWidth: CGFloat) -> CGFloat
+  {
     return collectionViewWidth / CGFloat(columns) - horizontalMargin / 2
   }
 
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
-                      insetForSectionAt section: Int) -> UIEdgeInsets {
+                      insetForSectionAt section: Int) -> UIEdgeInsets
+  {
 
     return UIEdgeInsets(top: 1, left: 0, bottom: 1, right: 0)
   }
 
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                      minimumLineSpacingForSectionAt section: Int) -> CGFloat
+  {
     return horizontalMargin / 2
   }
 
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
-                      minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+                      minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
+  {
     return horizontalMargin / 2
   }
 
   func collectionView(_ collectionView: UICollectionView,
                       willDisplay cell: UICollectionViewCell,
-                      forItemAt indexPath: IndexPath) {
-
+                      forItemAt indexPath: IndexPath)
+  {
     guard let dotCell = cell as? DotsCollectionViewCell
       else {
         fatalError("Cell could not be created: \(DotsCollectionViewCell.identifier)")
@@ -175,7 +184,8 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
     setCell(cell: dotCell, viewData: viewData, collectionViewWidth: collectionView.bounds.width)
   }
 
-  private func setCell(cell: DotsCollectionViewCell, viewData: MatrixItemViewData, collectionViewWidth: CGFloat) {
+  private func setCell(cell: DotsCollectionViewCell, viewData: MatrixItemViewData, collectionViewWidth: CGFloat)
+  {
     switch viewData
     {
     case .dot:
@@ -185,18 +195,22 @@ class DotsCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout
     }
   }
 
-  private func setDotCell(cell: DotsCollectionViewCell, collectionViewWidth: CGFloat) {
+  private func setDotCell(cell: DotsCollectionViewCell, collectionViewWidth: CGFloat)
+  {
     let width = calculateItemWidth(collectionViewWidth: collectionViewWidth)
     cell.shapeView.layer.cornerRadius = width / 2
     cell.shapeView.backgroundColor = UIColor.cyan
   }
 
-  private func setRectangleCell(cell: DotsCollectionViewCell, belongsToLargest: Bool) {
+  private func setRectangleCell(cell: DotsCollectionViewCell, belongsToLargest: Bool)
+  {
     cell.shapeView.layer.cornerRadius = 0
-    if belongsToLargest {
+    if belongsToLargest
+    {
       cell.shapeView.backgroundColor = UIColor.red
     }
-    else {
+    else
+    {
       cell.shapeView.backgroundColor = UIColor.blue
     }
   }

@@ -9,17 +9,10 @@
 import XCTest
 @testable import DotsMatrix
 
-class DotsMatrixTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testMatrixInit() {
+class DotsMatrixTests: XCTestCase
+{
+    func testMatrixInit()
+    {
         let dotsMatrix = DotsMatrix(rows: 20, columns: 15)
         
         for row in 0..<dotsMatrix.matrix.count
@@ -37,7 +30,8 @@ class DotsMatrixTests: XCTestCase {
         }
     }
     
-    func testMatrixChangeToRectangle() {
+    func testMatrixChangeToRectangle()
+    {
         var dotsMatrix = DotsMatrix(rows: 20, columns: 15)
         dotsMatrix.indexTapped(row: 5, column: 9)
 
@@ -45,13 +39,14 @@ class DotsMatrixTests: XCTestCase {
         switch item
         {
         case .rectangle(let belong):
-            XCTAssert(belong == false)
+            XCTAssert(belong == true)
         case .dot:
             XCTAssert(false)
         }
     }
     
-    func testMatrixChangeToDot() {
+    func testMatrixChangeToDot()
+    {
         var dotsMatrix = DotsMatrix(rows: 20, columns: 15)
         dotsMatrix.indexTapped(row: 5, column: 9)
         dotsMatrix.indexTapped(row: 5, column: 9)

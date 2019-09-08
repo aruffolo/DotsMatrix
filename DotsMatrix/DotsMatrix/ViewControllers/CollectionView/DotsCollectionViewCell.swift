@@ -8,7 +8,8 @@
 
 import UIKit
 
-class DotsCollectionViewCell: UICollectionViewCell {
+class DotsCollectionViewCell: UICollectionViewCell
+{
     static let identifier: String = "DotsCollectionViewCell"
     
     @IBOutlet weak var shapeView: UIView!

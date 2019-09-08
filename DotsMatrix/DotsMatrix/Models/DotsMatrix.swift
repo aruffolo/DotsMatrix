@@ -28,7 +28,8 @@ struct DotsMatrix
     matrix = Array.init(repeating: Array.init(repeating: .dot, count: columns), count: rows)
   }
 
-  mutating func indexTapped(row: Int, column: Int) {
+  mutating func indexTapped(row: Int, column: Int)
+  {
     switch matrix[row][column]
     {
     case .dot:
@@ -260,7 +261,8 @@ struct DotsMatrix
     return true
   }
 
-  mutating func selectAll() {
+  mutating func selectAll()
+  {
     for row in 0..<matrix.count
     {
       for column in 0..<matrix[row].count
@@ -271,7 +273,8 @@ struct DotsMatrix
     currentMaxRectangle = Rectangle(row: 0, column: 0, rowSize: matrix.count, columnSize: matrix[0].count)
   }
 
-  func printMatrix() {
+  func printMatrix()
+  {
     for row in 0..<matrix.count
     {
       var rowString = ""
