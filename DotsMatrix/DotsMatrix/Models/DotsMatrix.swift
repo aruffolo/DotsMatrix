@@ -24,7 +24,7 @@ struct DotsMatrix
 
   init(rows: Int, columns: Int)
   {
-    matrix = [[]]
+    precondition(rows > 0 && columns > 0, "matrix size must be at leat 1x1")
     matrix = Array.init(repeating: Array.init(repeating: .dot, count: columns), count: rows)
   }
 
